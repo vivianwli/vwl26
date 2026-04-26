@@ -12,9 +12,9 @@
 @font-face {
   font-family: 'Neue Montreal';
   font-style: normal;
-  font-weight: 100;
+  font-weight: 300;
   font-display: swap;
-  src: url('/fonts/Neue Montreal/PPNeueMontreal-Thin.woff2') format('woff2');
+  src: url('/fonts/Neue Montreal/PPNeueMontreal-Book.woff2') format('woff2');
 }
 
 @font-face {
@@ -28,4 +28,19 @@
 @theme {
   --font-sans: 'Neue Montreal', sans-serif;
   --font-serif: 'Eiko', serif;
+  --font-weight-normal: 300;
+  --font-weight-bold: 500;
+
+  --color-primary: #7E1010;
+}
+
+.font-serif {
+  letter-spacing: -0.05em;
+}
+
+body {
+  font-family: var(--font-sans);
+  letter-spacing: -0.03em;
+  font-weight: 300;
+  color: var(--color-slate-800);
 }
