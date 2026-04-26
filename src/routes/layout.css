@@ -1,2 +1,31 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+@font-face {
+  font-family: 'Eiko';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/Eiko/PPEiko-Thin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/Neue Montreal/PPNeueMontreal-Thin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/Neue Montreal/PPNeueMontreal-Medium.woff2') format('woff2');
+}
+
+@theme {
+  --font-sans: 'Neue Montreal', sans-serif;
+  --font-serif: 'Eiko', serif;
+}
