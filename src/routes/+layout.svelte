@@ -9,6 +9,7 @@
 	import InstagramLogoIcon from 'phosphor-svelte/lib/InstagramLogoIcon';
 	import PinterestLogoIcon from 'phosphor-svelte/lib/PinterestLogoIcon';
 	import ReadCvLogoIcon from 'phosphor-svelte/lib/ReadCvLogoIcon';
+	import StripesBackground from '$lib/components/Stripes.svelte';
 
 	const externalLinks = [
 		{
@@ -53,6 +54,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-primary/10">
+	 <StripesBackground />
 	<header class="flex items-center justify-between px-5 py-5">
 		<img src={logo} alt="Logo" class="w-20 h-10 object-cover"/>
 		<div id="external-links" class="flex gap-2 bg-slate-50/60 border border-slate-800/40 px-2 py-2 rounded shadow-lg shadow-slate-800/5 backdrop-blur-sm">
