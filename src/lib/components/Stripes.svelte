@@ -12,7 +12,7 @@
     const steps = 200;
     for (let i = 0; i <= steps; i++) {
       const y = (i / steps) * height;
-      const offset = (Math.random() - 0.5) * 2; // random offset for wobble
+      const offset = (Math.random() - 0.5) * 1; // random offset for wobble
       points.push(`${x + offset},${y}`);
     }
     return `M${points.join(' L')}`;
@@ -22,7 +22,7 @@
   const startJitter = (stripe: stripe) => {
     stripe.interval = setInterval(() => {
      stripe.d = wobblePath(stripe.x);
-    }, 100);
+    }, 60);
   };
 
   // function: stop jitter and reset path
@@ -44,7 +44,7 @@
   );
 </script>
 
-<svg class="fixed inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<svg class="fixed w-full h-full" xmlns="http://www.w3.org/2000/svg">
   {#each stripes as stripe (stripe.x)}
     <g 
       class="group" 

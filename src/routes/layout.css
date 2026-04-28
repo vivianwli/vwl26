@@ -34,13 +34,17 @@
   --color-primary: #7E1010;
 }
 
-.font-serif {
-  letter-spacing: -0.05em;
+@layer base {
+  html { @apply overflow-x-auto h-full; }
+  body { @apply text-gray-800 font-light tracking-tight font-sans h-full; }
+  h1, h2, h3, h4, h5, h6 { @apply font-serif; }
+  h1 { @apply text-6xl text-primary; }
+  h2 { @apply text-3xl text-gray-700; }
+  .font-serif { @apply tracking-tighter; }
 }
 
-body {
-  font-family: var(--font-sans);
-  letter-spacing: -0.03em;
-  font-weight: 300;
-  color: var(--color-slate-800);
+@layer components {
+  .card { @apply rounded border border-gray-800/40 backdrop-blur-[2px] bg-gray-50/60 shadow-lg shadow-gray-800/5; }
+  .card-bg { @apply bg-gray-50/60 backdrop-blur-[2px]; }
+  .card-border { @apply border-gray-800/40; }
 }

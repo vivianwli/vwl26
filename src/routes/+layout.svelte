@@ -53,14 +53,14 @@
 	<title>vivian li ᯓ★</title>
 </svelte:head>
 
-<div class="min-h-screen bg-primary/10">
+<div class="min-h-screen min-w-screen bg-primary/10 fixed">
 	 <StripesBackground />
 	<header class="flex items-center justify-between px-5 py-5">
 		<img src={logo} alt="Logo" class="w-20 h-10 object-cover"/>
-		<div id="external-links" class="flex gap-2 bg-slate-50/60 border border-slate-800/40 px-2 py-2 rounded shadow-lg shadow-slate-800/5 backdrop-blur-sm">
+		<div id="external-links" class="flex gap-2 p-2 card">
 			{#each externalLinks as link (link.name)}
 				<a href={link.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1">
-					<link.icon size={24} class="text-slate-800"/>
+					<link.icon size={24} class="text-gray-800"/>
 					{#if link.text}
 						<span>{link.text}</span>
 					{/if}
