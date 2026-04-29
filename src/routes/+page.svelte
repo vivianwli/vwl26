@@ -11,27 +11,27 @@
   import uxConfidenceThumbnail from '$lib/assets/ux-confidence.png';
   import sierThumbnail from '$lib/assets/sier-cover.png';
   import otherThumbnail from '$lib/assets/apples.jpeg';
+	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
   const portfolioItems = [
     [
-      { title: 'Palantir', thumbnail: palantirThumbnail },
-      { title: 'Microsoft Research', thumbnail: msrThumbnail },
-      { title: 'New York Times', thumbnail: nytThumbnail },
-      { title: 'HackSC 2024', thumbnail: hackscThumbnail },
-
+      { title: 'Palantir', thumbnail: palantirThumbnail, slug: "palantir" },
+      { title: 'Microsoft Research', thumbnail: msrThumbnail, slug: "microsoft-research" },
+      { title: 'New York Times', thumbnail: nytThumbnail, slug: "new-york-times" },
+      { title: 'HackSC 2024', thumbnail: hackscThumbnail, slug: "hacksc-2024" },
     ],
     [
-      { title: 'Reddit', thumbnail: redditThumbnail },
-      { title: 'The Pudding', thumbnail: puddingThumbnail },
-      { title: 'UX Confidence', thumbnail: uxConfidenceThumbnail },
-      { title: 'Sier', thumbnail: sierThumbnail },
-      { title: 'Other projects', thumbnail: otherThumbnail },
+      { title: 'Reddit', thumbnail: redditThumbnail, slug: "reddit" },
+      { title: 'The Pudding', thumbnail: puddingThumbnail, slug: "the-pudding" },
+      { title: 'UX Confidence', thumbnail: uxConfidenceThumbnail, slug: "ux-confidence" },
+      { title: 'Sier', thumbnail: sierThumbnail, slug: "sier" },
+      { title: 'Other projects', thumbnail: otherThumbnail, slug: "other-projects" },
     ]
   ];
 </script>
 
-<div id="main" class="flex items-center h-screen px-50 w-max">
-  <div class="flex card h-full max-h-120 overflow-hidden">
+<div id="main" class="flex items-center h-screen px-50 py-20 w-max">
+  <div class="flex card h-full max-h-120 overflow-visible">
     <div class="w-sm shrink-0">
       <img src={headshot1} alt="Vivian Li" class="w-full h-full object-cover" />
     </div>
@@ -44,14 +44,14 @@
       </h2>
     </div>
     <div class="border-l card-border grid grid-rows-2">
-      <div class="flex h-full bg-slate-800/10">
+      <div class="flex h-full">
         {#each portfolioItems[0] as item (item.title)}
-          <img src={item.thumbnail} alt={item.title} class="max-h-full max-w-full not-first:border-l card-border"/>
+          <ProjectCard project={item} row="top"/>
         {/each}
       </div>
-      <div class="flex h-full bg-slate-800/10 border-t card-border">
+      <div class="flex h-full border-t card-border">
         {#each portfolioItems[1] as item (item.title)}
-          <img src={item.thumbnail} alt={item.title} class="max-h-full max-w-full not-first:border-l card-border last:flex-1 last:w-0 last:object-cover last:opacity-70"/>
+          <ProjectCard project={item} row="bottom"/>
         {/each}
       </div>
     </div>
