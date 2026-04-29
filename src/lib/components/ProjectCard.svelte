@@ -1,5 +1,6 @@
 <script lang="ts" >
-	import { fade } from "svelte/transition";
+  import { Tween } from "svelte/motion";
+  import { cubicOut } from "svelte/easing";
 
   type Project = {
     title: string;
@@ -10,33 +11,35 @@
 
   let { project, row } = $props();
 
-  const progress = 1;
+  const progress = new Tween(0, { duration: 200, easing: cubicOut });
+  // let isHovered = $derived(progress.current < progress.target || progress.target === 1);
   let w = $state(0);
   let h = $state(0);
 
-  const TAB_PADDING = 32;
+  const TAB_PADDING = 40;
   let tabTextWidth = $state(0);
   let tabW = $derived(tabTextWidth + TAB_PADDING);
 
-  const generateTabPath = (w: number, h: number, progress: number, position: "top" | "bottom") => {
-    const tabH = 30 * progress;
-    const r = 8 * progress; // corner rounding radius
-    const inset = 10 * progress;
-    const tabLeft = (w - tabW) * 0.5;
-    const tabRight = (w + tabW) * 0.5;
+  const generateTabPath = (w: number, h: number, t: number, position: "top" | "bottom") => {
+    const tabH = 30 * t;
+    const r = 8 * t; // corner rounding radius
+    const inset = 10 * t;
+    const tabLeft = 16;
+    const tabRight = 16 + tabW;
     const tabLeftTop = tabLeft + inset;
     const tabRightTop = tabRight - inset;
+    const tabCurve = tabH ? (inset * r) / tabH : 0;
 
     if (position === "top") {
       return [
         `M 0 0`,
         `L ${tabLeft - r} 0`,
-        `Q ${tabLeft} 0 ${tabLeft + (inset * r) / tabH} ${-r}`,
-        `L ${tabLeftTop - (inset * r) / tabH} ${-tabH + r}`,
+        `Q ${tabLeft} 0 ${tabLeft + tabCurve} ${-r}`,
+        `L ${tabLeftTop - tabCurve} ${-tabH + r}`,
         `Q ${tabLeftTop} ${-tabH} ${tabLeftTop + r} ${-tabH}`,
         `L ${tabRightTop - r} ${-tabH}`,
-        `Q ${tabRightTop} ${-tabH} ${tabRightTop + (inset * r) / tabH} ${-tabH + r}`,
-        `L ${tabRight - (inset * r) / tabH} ${-r}`,
+        `Q ${tabRightTop} ${-tabH} ${tabRightTop + tabCurve} ${-tabH + r}`,
+        `L ${tabRight - tabCurve} ${-r}`,
         `Q ${tabRight} 0 ${tabRight + r} 0`,
         `L ${w} 0`,
         `L ${w} ${h}`,
@@ -50,12 +53,12 @@
         `L ${w} 0`,
         `L ${w} ${h}`,
         `L ${tabRight + r} ${h}`,
-        `Q ${tabRight} ${h} ${tabRight - (inset * r) / tabH} ${h + r}`,
-        `L ${tabRightTop + (inset * r) / tabH} ${h + tabH - r}`,
+        `Q ${tabRight} ${h} ${tabRight - tabCurve} ${h + r}`,
+        `L ${tabRightTop + tabCurve} ${h + tabH - r}`,
         `Q ${tabRightTop} ${h + tabH} ${tabRightTop - r} ${h + tabH}`,
         `L ${tabLeftTop + r} ${h + tabH}`,
-        `Q ${tabLeftTop} ${h + tabH} ${tabLeftTop - (inset * r) / tabH} ${h + tabH - r}`,
-        `L ${tabLeft + (inset * r) / tabH} ${h + r}`,
+        `Q ${tabLeftTop} ${h + tabH} ${tabLeftTop - tabCurve} ${h + tabH - r}`,
+        `L ${tabLeft + tabCurve} ${h + r}`,
         `Q ${tabLeft} ${h} ${tabLeft - r} ${h}`,
         `L 0 ${h}`,
         `L 0 0`,
@@ -79,27 +82,40 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <path 
-        d={generateTabPath(w, h, progress, row)}
-        class="fill-gray-50/60 stroke-gray-800/40 stroke-1"
+        d={generateTabPath(w, h, progress.current, row)}
+        class="fill-gray-50 stroke-gray-800/40 stroke-1"
       />
     </svg>
   {/if}
-  <span bind:clientWidth={tabTextWidth} class="absolute" transition:fade>{project.title}</span>
+    <span 
+      bind:clientWidth={tabTextWidth} 
+      class="absolute left-9 {row === "top" ? "-top-6.5" : "-bottom-6.5"} opacity-0 {progress.current < progress.target || progress.target === 1 ? "opacity-100" : "opacity-0"} transition-opacity duration-150 whitespace-nowrap" 
+    >
+      {project.title}
+    </span>
 {/snippet}
 
 <div 
   class="h-full min-w-0 relative overflow-visible"  
   bind:clientWidth={w} 
   bind:clientHeight={h}
-  // onmouseenter={() => progress.set(1)}
-  // onmouseleave={() => progress.set(0)}
 >
   {#if project.link}
-    <a href={project.link} target="_blank" rel="noopener noreferrer">
+    <a 
+      href={project.link} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      onmouseenter={() => progress.set(1)}
+      onmouseleave={() => progress.set(0)}
+    >
       {@render thumbnail(project, row)}
     </a>
   {:else}
-    <a href="/portfolio/{project.slug}">
+    <a 
+      href="/portfolio/{project.slug}"
+      onmouseenter={() => progress.set(1)}
+      onmouseleave={() => progress.set(0)}
+    >
       {@render thumbnail(project, row)}
     </a>
   {/if}

@@ -24,18 +24,18 @@
       { title: 'Reddit', thumbnail: redditThumbnail, slug: "reddit" },
       { title: 'The Pudding', thumbnail: puddingThumbnail, slug: "the-pudding" },
       { title: 'UX Confidence', thumbnail: uxConfidenceThumbnail, slug: "ux-confidence" },
-      { title: 'Sier', thumbnail: sierThumbnail, slug: "sier" },
-      { title: 'Other projects', thumbnail: otherThumbnail, slug: "other-projects" },
+      { title: 'SIER', thumbnail: sierThumbnail, slug: "sier" },
+      { title: '...', thumbnail: otherThumbnail, slug: "other-projects" },
     ]
   ];
 </script>
 
 <div id="main" class="flex items-center h-screen px-50 py-20 w-max">
-  <div class="flex card h-full max-h-120 overflow-visible">
-    <div class="w-sm shrink-0">
+  <div class="flex card-bg h-full divide-x max-h-120 overflow-visible">
+    <div class="w-sm shrink-0 border-l border-y card-border rounded-l">
       <img src={headshot1} alt="Vivian Li" class="w-full h-full object-cover" />
     </div>
-    <div class="w-xl px-20 shrink-0 border-l card-border flex flex-col justify-center gap-2">
+    <div class="w-xl px-20 shrink-0 border-y card-border flex flex-col justify-center gap-2">
       <h1>
         Vivian Li
       </h1>
@@ -43,13 +43,13 @@
         is a product design engineer based in New York City, telling stories with design and data.
       </h2>
     </div>
-    <div class="border-l card-border grid grid-rows-2">
+    <div class="grid grid-rows-2 border-r card-border rounded-r">
       <div class="flex h-full">
         {#each portfolioItems[0] as item (item.title)}
           <ProjectCard project={item} row="top"/>
         {/each}
       </div>
-      <div class="flex h-full border-t card-border">
+      <div class="flex h-full">
         {#each portfolioItems[1] as item (item.title)}
           <ProjectCard project={item} row="bottom"/>
         {/each}
