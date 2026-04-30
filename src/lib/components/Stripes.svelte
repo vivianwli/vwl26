@@ -36,7 +36,7 @@
 
   // initialize stripe paths
   let stripes = $state(
-    Array.from({ length: 200 }, (_, i) => ({
+    Array.from({ length: 300 }, (_, i) => ({
       x: i * 10,
       d: wobblePath(i * 10),
       interval: null,

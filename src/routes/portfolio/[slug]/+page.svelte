@@ -1,9 +1,11 @@
 <script lang="ts">
+	import TabBar from '$lib/components/TabBar.svelte';
   import { generateTabPath } from '$lib/utils/tabPath';
   import type { PageProps } from './$types';
 
+  import { portfolioItems } from '$lib/data/portfolio';
+
   let { data }: PageProps = $props();
-  let tabTextWidth = $state(0);
   let w = $state(0);
   let h = $state(0);
 </script>
@@ -20,6 +22,12 @@
       class="w-xl h-xl not-first:border-l divider-color object-cover"
       style:view-transition-name="thumbnail-{data.project.slug}"
     /> -->
+    <div class="absolute inset-0">
+      <TabBar 
+        tabs={portfolioItems.flat()} 
+        activeTab={data.project.slug} 
+      />
+    </div>
     {#if w && h}
       <svg 
         class="absolute inset-0 pointer-events-none overflow-visible -z-10"
@@ -28,19 +36,11 @@
         xmlns="http://www.w3.org/2000/svg"
       >
         <path 
-          d={generateTabPath(w, h, 1, "top", tabTextWidth)}
+          d={generateTabPath(w, h, 0, "none")}
           class="fill-gray-50 divider-color stroke-1"
         />
       </svg>
     {/if}
-
-    <span 
-      bind:clientWidth={tabTextWidth} 
-      class="absolute left-9 -top-6.5 opacity-100 transition-opacity duration-150 whitespace-nowrap"
-      style:view-transition-name="tab-label-{data.project.slug}"
-    >
-      {data.project.title}
-    </span>
 
     <!-- <div transition:fade> -->
       <h1 class="relative z-10">{data.project.title}</h1>
