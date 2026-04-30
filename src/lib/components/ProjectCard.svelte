@@ -12,7 +12,6 @@
   let { project, row } = $props();
 
   const progress = new Tween(0, { duration: 200, easing: cubicOut });
-  // let isHovered = $derived(progress.current < progress.target || progress.target === 1);
   let w = $state(0);
   let h = $state(0);
 
@@ -73,7 +72,7 @@
   <img 
     src={project.thumbnail} 
     alt={project.title} 
-    class="h-full not-first:border-l card-border p-[0.5px] hover:p-1.5 transition-all duration-200 {row === "bottom" && "last:flex-1 last:w-0 last:object-cover last:opacity-70"}"
+    class="block h-full not-first:border-l card-border p-[0.5px] hover:p-1.5 transition-all duration-200 object-cover"
   />
   {#if w && h}
     <svg 
@@ -83,7 +82,7 @@
     >
       <path 
         d={generateTabPath(w, h, progress.current, row)}
-        class="fill-gray-50 stroke-gray-800/40 stroke-1"
+        class="fill-gray-50 stroke-gray-400 stroke-1"
       />
     </svg>
   {/if}
@@ -96,7 +95,7 @@
 {/snippet}
 
 <div 
-  class="h-full min-w-0 relative overflow-visible"  
+  class="h-full min-w-0 relative overflow-visible {row === "bottom" && "last:flex-1 last:w-0"}"  
   bind:clientWidth={w} 
   bind:clientHeight={h}
 >
@@ -105,18 +104,29 @@
       href={project.link} 
       target="_blank" 
       rel="noopener noreferrer"
+      class="block h-full"
+      onmouseenter={() => progress.set(1)}
+      onmouseleave={() => progress.set(0)}
+    >
+      {@render thumbnail(project, row)}
+    </a>
+  {:else if project.slug}
+    <a 
+      href="/portfolio/{project.slug}"
+      class="block h-full"
       onmouseenter={() => progress.set(1)}
       onmouseleave={() => progress.set(0)}
     >
       {@render thumbnail(project, row)}
     </a>
   {:else}
-    <a 
-      href="/portfolio/{project.slug}"
+    <div 
+      class="block h-full"
       onmouseenter={() => progress.set(1)}
       onmouseleave={() => progress.set(0)}
+      role="figure"
     >
       {@render thumbnail(project, row)}
-    </a>
+    </div>
   {/if}
 </div>

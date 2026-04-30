@@ -44,8 +44,8 @@
 }
 
 @layer components {
-  .card { @apply rounded border border-gray-800/40 backdrop-blur-[2px] bg-gray-50/40 shadow-lg shadow-gray-800/5; }
-  .card-shadow { @apply shadow-lg shadow-gray-800/5; }
+  .card { @apply rounded border border-gray-400 backdrop-blur-[2px] bg-gray-50/40 shadow-lg shadow-gray-800/5; }
+  .card-shadow { @apply shadow-xl shadow-gray-800/5; }
   .card-bg { @apply bg-gray-50/40 backdrop-blur-[2px]; }
-  .card-border { @apply border-gray-800/40; }
+  .card-border { @apply border-gray-400; }
 }
