@@ -58,7 +58,7 @@
         />
       <path
         d={stripe.d}
-        class="stroke-primary/10 stroke-3 fill-none group-hover:stroke-primary/20 transition-colors duration-300"
+        class="stroke-primary/10 stroke-3 fill-none group-hover:stroke-primary/20 group-hover:stroke-4 transition-colors duration-300"
       />
     </g>
   {/each}

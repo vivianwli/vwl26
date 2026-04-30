@@ -54,9 +54,13 @@
 </svelte:head>
 
 <div class="min-h-screen min-w-screen bg-primary/10 fixed">
-	 <StripesBackground />
-	<header class="flex items-center justify-between px-5 py-5">
-		<img src={logo} alt="Logo" class="w-20 h-10 object-cover"/>
+	<StripesBackground />
+	<header class="relative z-10 flex items-center justify-between px-5 py-5">
+		<div>
+			<a href="/">
+				<img src={logo} alt="Logo" class="w-20 h-10 object-cover"/>
+			</a>
+		</div>
 		<div id="external-links" class="flex gap-2 p-2 card">
 			{#each externalLinks as link (link.name)}
 				<a href={link.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1">

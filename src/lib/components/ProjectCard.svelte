@@ -112,7 +112,7 @@
     </a>
   {:else if project.slug}
     <a 
-      href="/portfolio/{project.slug}"
+      href={`/portfolio/${project.slug}`}
       class="block h-full"
       onmouseenter={() => progress.set(1)}
       onmouseleave={() => progress.set(0)}
