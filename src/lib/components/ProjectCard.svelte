@@ -73,7 +73,7 @@
   <img 
     src={project.thumbnail} 
     alt={project.title} 
-    class="h-full not-first:border-l card-border hover:p-1.5 transition-all duration-200 {row === "bottom" && "last:flex-1 last:w-0 last:object-cover last:opacity-70"}"
+    class="h-full not-first:border-l card-border p-[0.5px] hover:p-1.5 transition-all duration-200 {row === "bottom" && "last:flex-1 last:w-0 last:object-cover last:opacity-70"}"
   />
   {#if w && h}
     <svg 

@@ -31,7 +31,7 @@
 </script>
 
 <div id="main" class="flex items-center h-screen px-50 py-20 w-max">
-  <div class="flex card-bg h-full divide-x max-h-120 overflow-visible">
+  <div class="flex card-bg card-shadow h-full divide-x max-h-120 overflow-visible">
     <div class="w-sm shrink-0 border-l border-y card-border rounded-l">
       <img src={headshot1} alt="Vivian Li" class="w-full h-full object-cover" />
     </div>
