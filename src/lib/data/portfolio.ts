@@ -19,13 +19,13 @@ export type PortfolioProject = {
 export const portfolioItems: PortfolioProject[][] = [
   [
     { title: 'Palantir', thumbnail: palantirThumbnail, slug: 'palantir' },
-    { title: 'Microsoft Research Lab', thumbnail: msrThumbnail, slug: 'microsoft-research' },
+    { title: 'The Pudding', thumbnail: puddingThumbnail, slug: 'the-pudding' },
     { title: 'The New York Times', thumbnail: nytThumbnail, slug: 'new-york-times' },
     { title: 'HackSC', thumbnail: hackscThumbnail, slug: 'hacksc-2024' },
   ],
   [
     { title: 'Reddit', thumbnail: redditThumbnail, slug: 'reddit' },
-    { title: 'The Pudding', thumbnail: puddingThumbnail, slug: 'the-pudding' },
+    { title: 'Microsoft Research Lab', thumbnail: msrThumbnail, slug: 'microsoft-research' },
     { title: 'UX confidence research', thumbnail: uxConfidenceThumbnail, slug: 'ux-confidence' },
     { title: 'SIER', thumbnail: sierThumbnail, slug: 'sier' },
     { title: 'more  ☺', thumbnail: otherThumbnail, slug: 'other-projects' },

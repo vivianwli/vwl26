@@ -32,6 +32,7 @@
   --font-weight-bold: 500;
 
   --color-primary: #7E1010;
+  --color-divider: var(--color-gray-400);
 }
 
 @layer base {
@@ -41,11 +42,58 @@
   h1 { @apply text-6xl text-primary; }
   h2 { @apply text-3xl text-gray-700; }
   .font-serif { @apply tracking-tighter; }
+
+  html, body, .layout-shell, .layout-shell * {
+    view-transition-name: none;
+  }
+
+  ::view-transition-old(*), ::view-transition-new(*) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-delay: 0ms;
+  }
+
+  ::view-transition-old(*) {
+    animation-name: view-transition-fade-out;
+  }
+
+  ::view-transition-new(*) {
+    animation-name: view-transition-fade-in;
+  }
+
+  ::view-transition-image-pair(*) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+
+  @keyframes view-transition-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes view-transition-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
 }
 
 @layer components {
-  .card { @apply rounded border border-gray-400 backdrop-blur-[2px] bg-gray-50/40 shadow-lg shadow-gray-800/5; }
-  .card-shadow { @apply shadow-xl shadow-gray-800/5; }
+  .divider-color { @apply border-primary/30 outline-primary/30 stroke-primary/30; }
+  .card { @apply rounded border border-primary/30 backdrop-blur-[2px] bg-gray-50/40 shadow-lg shadow-gray-400/5; }
+  .card-shadow { @apply shadow-xl shadow-gray-400/10; }
   .card-bg { @apply bg-gray-50/40 backdrop-blur-[2px]; }
-  .card-border { @apply border-gray-400; }
 }

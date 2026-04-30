@@ -1,6 +1,7 @@
 <script lang="ts" >
   import { Tween } from "svelte/motion";
   import { cubicOut } from "svelte/easing";
+  import { generateTabPath } from "$lib/utils/tabPath";
 
   type Project = {
     title: string;
@@ -15,80 +16,33 @@
   let w = $state(0);
   let h = $state(0);
 
-  const TAB_PADDING = 40;
   let tabTextWidth = $state(0);
-  let tabW = $derived(tabTextWidth + TAB_PADDING);
-
-  const generateTabPath = (w: number, h: number, t: number, position: "top" | "bottom") => {
-    const tabH = 30 * t;
-    const r = 8 * t; // corner rounding radius
-    const inset = 10 * t;
-    const tabLeft = 16;
-    const tabRight = 16 + tabW;
-    const tabLeftTop = tabLeft + inset;
-    const tabRightTop = tabRight - inset;
-    const tabCurve = tabH ? (inset * r) / tabH : 0;
-
-    if (position === "top") {
-      return [
-        `M 0 0`,
-        `L ${tabLeft - r} 0`,
-        `Q ${tabLeft} 0 ${tabLeft + tabCurve} ${-r}`,
-        `L ${tabLeftTop - tabCurve} ${-tabH + r}`,
-        `Q ${tabLeftTop} ${-tabH} ${tabLeftTop + r} ${-tabH}`,
-        `L ${tabRightTop - r} ${-tabH}`,
-        `Q ${tabRightTop} ${-tabH} ${tabRightTop + tabCurve} ${-tabH + r}`,
-        `L ${tabRight - tabCurve} ${-r}`,
-        `Q ${tabRight} 0 ${tabRight + r} 0`,
-        `L ${w} 0`,
-        `L ${w} ${h}`,
-        `L 0 ${h}`,
-        `L 0 0`,
-        `Z`
-      ].join(" ");
-    } else {
-      return [
-        `M 0 0`,
-        `L ${w} 0`,
-        `L ${w} ${h}`,
-        `L ${tabRight + r} ${h}`,
-        `Q ${tabRight} ${h} ${tabRight - tabCurve} ${h + r}`,
-        `L ${tabRightTop + tabCurve} ${h + tabH - r}`,
-        `Q ${tabRightTop} ${h + tabH} ${tabRightTop - r} ${h + tabH}`,
-        `L ${tabLeftTop + r} ${h + tabH}`,
-        `Q ${tabLeftTop} ${h + tabH} ${tabLeftTop - tabCurve} ${h + tabH - r}`,
-        `L ${tabLeft + tabCurve} ${h + r}`,
-        `Q ${tabLeft} ${h} ${tabLeft - r} ${h}`,
-        `L 0 ${h}`,
-        `L 0 0`,
-        `Z`,
-      ].join(" ");
-    }
-  };
-
 </script>
 
 {#snippet thumbnail(project: Project, row: "top" | "bottom")}
   <img 
     src={project.thumbnail} 
     alt={project.title} 
-    class="block h-full not-first:border-l card-border p-[0.5px] hover:p-1.5 transition-all duration-200 object-cover"
+    class="block w-full h-full p-1 hover:p-2 transition-all duration-200 object-cover"
+    style:view-transition-name="thumbnail-{project.slug}"
   />
   {#if w && h}
     <svg 
       class="absolute inset-0 w-full h-full pointer-events-none overflow-visible -z-10"
+      style:view-transition-name="tab-shape-{project.slug}"
       viewBox={`0 0 ${w} ${h}`} 
       xmlns="http://www.w3.org/2000/svg"
     >
       <path 
-        d={generateTabPath(w, h, progress.current, row)}
-        class="fill-gray-50 stroke-gray-400 stroke-1"
+        d={generateTabPath(w, h, progress.current, row, tabTextWidth)}
+        class="fill-gray-50 divider-color stroke-1"
       />
     </svg>
   {/if}
     <span 
       bind:clientWidth={tabTextWidth} 
       class="absolute left-9 {row === "top" ? "-top-6.5" : "-bottom-6.5"} opacity-0 {progress.current < progress.target || progress.target === 1 ? "opacity-100" : "opacity-0"} transition-opacity duration-150 whitespace-nowrap" 
+      style:view-transition-name="tab-label-{project.slug}"
     >
       {project.title}
     </span>

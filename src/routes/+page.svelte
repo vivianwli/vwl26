@@ -9,7 +9,7 @@
     <div class="w-sm h-full shrink-0 rounded-l">
        <ProjectCard project={{ title: "me  ☺", thumbnail: headshot }} row="top"/>
     </div>
-    <div class="w-xl px-18 shrink-0 outline-1 outline-gray-400 outline-offset-[-0.5px] card-border flex flex-col justify-center gap-2">
+    <div class="w-xl px-18 shrink-0 border-y divider-color flex flex-col justify-center gap-2">
       <h1>
         Vivian Li
       </h1>
