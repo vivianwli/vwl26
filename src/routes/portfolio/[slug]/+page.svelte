@@ -1,7 +1,8 @@
 <script lang="ts">
   import { generateTabPath } from '$lib/utils/tabPath';
+  import type { PageProps } from './$types';
 
-  let { data } = $props<{ project: { title: string; thumbnail: string; slug: string; description?: string } }>();
+  let { data }: PageProps = $props();
   let tabTextWidth = $state(0);
   let w = $state(0);
   let h = $state(0);
